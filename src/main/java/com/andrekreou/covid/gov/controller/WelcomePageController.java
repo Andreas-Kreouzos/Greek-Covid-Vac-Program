@@ -53,7 +53,6 @@ public class WelcomePageController {
     public String submit(@ModelAttribute("covid") Covid covid,
                          Model model,
                          HttpServletRequest request) {
-
         model.addAttribute("referencedate", covid.getReferencedate());
         request.setAttribute("covidcases", service.showCases(covid.getReferencedate()));
         return "databasecontents";

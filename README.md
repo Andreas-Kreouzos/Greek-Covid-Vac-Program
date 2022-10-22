@@ -2,17 +2,17 @@
 
 
 This project is part of the final examination of the course "Medical IT"
-of MSc Program "Informatics" currently organised by University of Piraeus.
+of Master of Science Program "Informatics" currently organised by University of Piraeus.
 
 The purpose of this project is to consume an external API which provides
 the necessary data as JSON format and then expose these data with the necessary
-view in a HTML Thymeleaf template.
+view in an HTML Thymeleaf template.
 
 #### Languages and Tools:
 <div>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" title="Java" alt="Java" width="60" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/spring/spring-original-wordmark.svg" title="Spring" alt="Spring" width="60" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/intellij/intellij-original.svg" title="IntelliJ" alt="IntelliJ" width="60" height="60"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" title="Java" alt="Java" width="100" height="100"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/spring/spring-original-wordmark.svg" title="Spring" alt="Spring" width="100" height="100"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/intellij/intellij-original.svg" title="IntelliJ" alt="IntelliJ" width="100" height="100"/>&nbsp;
 </div>
 
 ## Spring Security
@@ -32,3 +32,52 @@ Of course, these dates could be modified according to the instructions of the AP
 of demonstration, only these two dates were chosen.
 
 <img width="812" alt="Consuming JSON" src="https://user-images.githubusercontent.com/77160233/197342597-8b8a8e64-065e-42f8-b608-101280cfcc80.png">
+
+In order to use this URL, it was necessary to provide additional authentication to the API. To be
+specific, an API key was needed that was produced as soon as the subscription to the API was completed.
+The final form of the POJO class was the following:
+
+```java
+package com.andrekreou.covid.gov.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+
+import javax.persistence.*;
+
+@Entity()
+@Table
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Covid {
+    @Id
+    @SequenceGenerator(
+            name = "covid_sequence",
+            sequenceName = "covid_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "covid_sequence"
+    )
+    private Integer id;
+    private String area;
+    private Integer areaid;
+    private String referencedate;
+    private Integer totaldose1;
+    private Integer totaldose2;
+    private Integer totaldose3;
+    private Integer totalvaccinations;
+}
+```
+
+## Display Data Based on Specific Date
+
+For the controller class, it was necessary for the user to have access to the vaccination data for each date
+independently. Thus, the creation of a new view for the setting of date was mandatory and a ```POST``` request to
+grab it. The latter was then passed via a Model object to the service class and finally to the Repository Class,
+all via dependency injection with ```@Autowired``` annotation.
