@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/db.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+
+</head>
+
+<body>
+
+<ul>
+    <li><a href="https://localhost:8443/">Home</a></li>
+    <li><a href="https://github.com/Andreas-Kreouzos" target="_blank">Github</a></li>
+</ul>
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <h1>Covid 19 Statistics</h1>
+    </div>
+
+</main>
+
+    <div class="container text-center" id="tasksDiv">
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Area</th>
+                    <th>Area ID</th>
+                    <th>Reference Date</th>
+                    <th>Total Dose 1</th>
+                    <th>Total Dose 2</th>
+                    <th>Total Dose 3</th>
+                    <th>Total Vaccinations</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="covid: ${covidcases}">
+                        <td th:text="${covid.id}"> </td>
+                        <td th:text="${covid.area}"> </td>
+                        <td th:text="${covid.areaid}"> </td>
+                        <td th:text="${covid.referencedate}"> </td>
+                        <td th:text="${covid.totaldose1}"> </td>
+                        <td th:text="${covid.totaldose2}"> </td>
+                        <td th:text="${covid.totaldose3}"> </td>
+                        <td th:text="${covid.totalvaccinations}"> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/main.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+    <style>
+        button {
+            line-height: 12px;
+            width: 10%;
+            height: 15%;
+            color: white;
+            background-color: #FF0000;
+            font-size: 10pt;
+            font-family: Ubuntu;
+            margin-top: 50px;
+            margin-right: 2px;
+            position:fixed;
+            top:5px;
+            right:10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<ul>
+    <li><a href="https://localhost:8443/">Home</a></li>
+    <li><a href="https://github.com/Andreas-Kreouzos" target="_blank">Github</a></li>
+    <li><a href="/date/insert">Database Contents</a></li>
+</ul>
+
+<main role="main" class="container">
+
+    <form class="form-signin" method="get" action="/logout">
+        <button class="button" type="submit">Logout</button>
+    </form>
+
+    <div class="starter-template">
+        <h1>Covid Statistics in Greece</h1>
+        <h2>
+            <span th:text="'Hello, ' + ${message}"></span>
+        </h2>
+    </div>
+
+</main>
+
+</body>
+</html>
